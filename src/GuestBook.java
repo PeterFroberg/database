@@ -15,15 +15,10 @@ public class GuestBook extends JFrame {
 
     private JTextArea textArea = new JTextArea("Getting your data....");
     private JTextField textFieldName = new JTextField();
-
     private JTextField textFieldEmail = new JTextField();
-
     private JTextField textFieldHomepage = new JTextField();
-
     private JTextField textFieldComment = new JTextField();
-
     private JButton submitButton = new JButton("Submit Data");
-
     public GuestBook(String[] args) {
         this.args = args;
 
