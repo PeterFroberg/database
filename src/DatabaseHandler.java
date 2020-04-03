@@ -4,6 +4,9 @@ public class DatabaseHandler {
     private Connection dbConnection;
     private PreparedStatement sqlStatment;
 
+    /**
+     * Connects to the database
+     */
     public void connectToDatabase(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -13,6 +16,14 @@ public class DatabaseHandler {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Inserts new data in the database
+     * @param name - Name to in insert in namn-column in the database
+     * @param epost - epsot to in insert in namn-column in the database
+     * @param hemsida - hemsida to in insert in namn-column in the database
+     * @param comment - comment to in insert in namn-column in the database
+     */
     public void insertDbPost(String name, String epost, String hemsida, String comment){
         try {
             sqlStatment = dbConnection.prepareStatement("INSERT INTO guestbook (namn, epost, hemsida, kommentar) VALUES(?, ?, ?, ?);");
@@ -26,15 +37,21 @@ public class DatabaseHandler {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Retrives comments from the database
+     * @return if successful returns a resultset with new comments otherwise returns null
+     */
     public ResultSet getComments(){
         try {
 
             sqlStatment = dbConnection.prepareStatement("SELECT * FROM guestbook");
             ResultSet resultSet = sqlStatment.executeQuery();
+            sqlStatment.close();
             return resultSet;
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }
